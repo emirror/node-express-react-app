@@ -1,9 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 
 
-function SinglePost() {
+function SinglePost(props) {
+
+    const [posts, setPosts] = useState([]);
+
+    const {
+        match: {
+            params: {
+                slug
+            }
+        }
+    } = props
+
+    useEffect(() => {
+        Axios.get(`http://localhost:3000/api/articles/${slug}`)
+            .then(res => setPosts(res.data.article));
+    }, [])
+
+    console.log(posts);
+
     return (
-        <h1>This is Single Post Page.</h1>
+
+        <React.Fragment>
+            {
+                posts && (
+                    <div>
+                        <h3>{posts.title}</h3>
+                        <h5>{posts.description}</h5>
+                        <p>{posts.body}</p>
+                    </div>
+                )
+            }
+
+        </React.Fragment>
+
+
+
     )
 }
 

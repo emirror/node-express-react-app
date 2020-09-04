@@ -15,7 +15,7 @@ function App() {
           <Route path="/" exact>
             <AllPosts />
           </Route>
-          <Route path="/blog/single-post" component={SinglePost} />
+          <Route path="/api/articles/:slug" component={SinglePost} />
           <Route>
             <NotFound />
           </Route>
