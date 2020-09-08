@@ -22,7 +22,7 @@ function AllPosts() {
                             <h5>{post.description}</h5>
                             <p>{post.body}</p>
                             <Link to={`/api/articles/${post.slug}`}>
-                            <span>Read more ...</span>
+                                <span>Read more ...</span>
                             </Link>
                             <hr />
                         </div>

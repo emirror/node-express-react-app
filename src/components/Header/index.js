@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navigation } from './style'
+import { Navigation } from './style';
 function Header() {
     const key = localStorage.getItem('token');
     return (
