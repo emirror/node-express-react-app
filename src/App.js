@@ -20,8 +20,8 @@ function App() {
         <Header />
         <Switch>
           <Route path="/login" component={Login} exact />
-          <Route path="/admin" component={CreatePost} exact />
-          <PrivateRoute path="/" component={AllPosts} />
+          <PrivateRoute path="/admin" component={CreatePost} exact />
+          <PrivateRoute path="/" component={AllPosts} exact/>
           <Route path="/api/articles/:slug" component={SinglePost} />
           <Route>
             <NotFound />
