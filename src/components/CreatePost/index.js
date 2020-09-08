@@ -5,10 +5,12 @@ function CreatePost() {
     const title = useRef(null)
     const description = useRef(null)
     const body = useRef(null)
-    const tags = useRef([])
+    const tags = useRef(null);
+
     const key = localStorage.getItem('token');
 
     function CreateHandler(e) {
+
         e.preventDefault();
         key && Axios
             .post('http://localhost:3000/api/articles',
@@ -17,7 +19,7 @@ function CreatePost() {
                         "title": title.current.value,
                         "description": description.current.value,
                         "body": body.current.value,
-                        "tagList": tags.current.value
+                        "tagList": tags.current.value.split(',')
                     }
                 },
                 {
