@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import AllPosts from './components/AllPosts';
 import SinglePost from './components/SinglePost';
@@ -9,28 +9,36 @@ import Login from './components/Login';
 import Header from './components/Header';
 import { Main } from './style';
 
-
-
 function App() {
 
+  const [token, tokenState] = useState([]);
+
+  function setToken(token) {
+    localStorage.setItem('token', token);
+    tokenState(token);
+  }
 
   return (
-    <Main>
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route path="/login" component={Login} exact />
-          <PrivateRoute path="/admin" component={CreatePost} exact />
-          <PrivateRoute path="/" component={AllPosts} exact/>
-          <Route path="/api/articles/:slug" component={SinglePost} />
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </Main>
+    <AppContext.Provider value={{ setToken }}>
+      <Main>
+        <BrowserRouter>
+          <Header getToken={token} />
+          <Switch>
+            <Route path="/login" component={Login} exact />
+            <PrivateRoute path="/admin" component={CreatePost} exact />
+            <PrivateRoute path="/" component={AllPosts} exact />
+            <Route path="/api/articles/:slug" component={SinglePost} />
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </Main>
+    </AppContext.Provider>
   )
 
 }
 
 export default App;
+export const AppContext = React.createContext(null);
+

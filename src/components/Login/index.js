@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import {  useHistory  } from 'react-router-dom';
 import { AppContext } from '../../App'
 import Axios from 'axios';
-function Login(props) {
+function Login() {
     const emailVal = useRef(null);
     const passVal = useRef(null);
     const history = useHistory();
-
+    const { setToken } = React.useContext(AppContext);
     function userLogin(e) {
         e.preventDefault();
         Axios
@@ -21,7 +21,7 @@ function Login(props) {
             .then(     
                 res => {
                     if (res.status == 200) {
-                        localStorage.setItem('token' , res.data.user.token);
+                        setToken(res.data.user.token);
                         return history.push("/");
                     }
                 }

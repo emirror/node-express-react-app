@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navigation } from './style';
-function Header() {
-    const key = localStorage.getItem('token');
+
+function Header(props) {
     return (
         <Navigation className="menu">
             <li>
@@ -12,11 +12,11 @@ function Header() {
                 <NavLink to="/About" exact>About</NavLink>
             </li>
             {
-                key && <li>
+                props.getToken && <li>
                     <NavLink to="/Admin" exact>Admin</NavLink>
                 </li>
             }
-            
+
         </Navigation>
     )
 }
