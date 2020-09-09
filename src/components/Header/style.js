@@ -10,16 +10,16 @@ export const Navigation = styled.menu`
         & a {
             text-decoration:none;
             padding: 5px 10px;
-            border:1px solid #31caff;
+            border:1px solid #053C5E;
             border-radius: 3px;
-            color: #31caff;
+            color: #053C5E;
             background-size:100% 200%;
-            background-image: linear-gradient(to bottom, transparent 50% , #31caff 50%);
+            background-image: linear-gradient(to bottom, transparent 50% , #053C5E 50%);
             transition: all .15s ease-in;
 
             &.active {
             color: #fff;
-            background-color: #31caff;
+            background-color: #053C5E;
             }
 
             &:hover {
