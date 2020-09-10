@@ -1,8 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Navigation } from './style';
+import { AppContext } from '../../App';
+
 
 function Header(props) {
+    
+const { setToken } = React.useContext(AppContext);
+
+    function Logout() {
+        localStorage.removeItem('token');
+        setToken(false);
+    }
+
     return (
         <Navigation className="menu">
             <li>
@@ -14,6 +24,11 @@ function Header(props) {
             {
                 props.getToken && <li>
                     <NavLink to="/Admin" exact>Admin</NavLink>
+                </li>
+            }
+            {
+                props.getToken && <li>
+                    <Link to="/login" exact onClick={Logout}>Logout</Link>
                 </li>
             }
 

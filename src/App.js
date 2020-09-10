@@ -11,11 +11,9 @@ import { Main } from './style';
 
 function App() {
 
-  const [token, tokenState] = useState([]);
-
+  const [token, tokenState] = useState(false);
   function setToken(token) {
-    localStorage.setItem('token', token);
-    tokenState(token);
+    return tokenState(token);
   }
 
   return (

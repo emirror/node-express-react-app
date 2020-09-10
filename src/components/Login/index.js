@@ -1,12 +1,16 @@
 import React, { useRef } from 'react';
-import {  useHistory  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../App'
 import Axios from 'axios';
+import { LoginStyle } from './style';
+
 function Login() {
     const emailVal = useRef(null);
     const passVal = useRef(null);
     const history = useHistory();
+    const error = 'email or password is wrong';
     const { setToken } = React.useContext(AppContext);
+
     function userLogin(e) {
         e.preventDefault();
         Axios
@@ -16,32 +20,34 @@ function Login() {
                         "email": emailVal.current.value,
                         "password": passVal.current.value
                     }
-                } 
+                }
             )
-            .then(     
+            .then(
                 res => {
                     if (res.status == 200) {
-                        setToken(res.data.user.token);
+                        localStorage.setItem('token', res.data.user.token);
+                        setToken(true);
                         return history.push("/");
                     }
                 }
             )
             .catch(
-                error => console.log(error)
+                error => { alert(error) }
             );
     }
 
 
 
     return (
-        <div>
+        <LoginStyle>
             <h1>Login to your Account</h1>
             <form>
                 <input type="email" placeholder="type your email" defaultValue="" ref={emailVal} />
                 <input type="password" placeholder="type your password" defaultValue="" ref={passVal} />
                 <button type="submit" onClick={userLogin}>Sign In</button>
             </form>
-        </div>
+            <span className="error"></span>
+        </LoginStyle>
 
     )
 }
